@@ -1,4 +1,8 @@
 // ‘ункци€ алгоритмического типа
+$Sequence  Ёкспоненциальный_интервал : real
+$Type = exponential  123456789
+$End
+
 $Function { <им€_функции> } : integer
 $Type = algorithmic
 $Parameters
