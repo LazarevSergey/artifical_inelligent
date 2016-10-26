@@ -7,7 +7,7 @@ $Parameters
 	Вход 				: (есть_заказ, нет_заказов)
 $End
 
-$Resource_type Станок : permanent { Ресурсы будут постоянными }
+$Resource_type Станки : permanent { Ресурсы будут постоянными }
 $Parameters
 	Номер_станка				: integer
 	Занятость_станка 			: (не_идет_печать, идет_печать) = не_идет_печать
@@ -18,7 +18,7 @@ $Parameters
 	Время_аренды				: integer = 720
 $End
 
-$Resource_type Заказы : temporary { Ресурсы будут временный }
+$Resource_type Заказы : permanent { Ресурсы будут временный }
 $Parameters
 	Номер_заказа 		: integer
 	Статус 				: (нет, в_очереди, в_печати) = нет
