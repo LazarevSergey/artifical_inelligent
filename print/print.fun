@@ -4,7 +4,7 @@ $Type = exponential  123456789
 $End
 
 
-$Sequence  Случайное_число : integer [0..1000000]
+$Sequence  Случайное_число : integer 
 $Type = uniform  123456789
 $End
 
@@ -30,3 +30,36 @@ $Body
 					Заказ_3.Позиция_в_очереди <> 4 and
 					Заказ_4.Позиция_в_очереди <> 4 Выбор_места_в_очереди = 4
 $End
+
+$Function  Выбор_станка : such_as Заказы.Имя_станка
+$Type = algorithmic
+$Parameters
+  Пусто  : such_as Станки.Занятость_станка
+$Body
+  Calculate_if Epson.Занятость_станка <> не_идет_печать and
+					Kyocera.Занятость_станка <> идет_печать Выбор_станка = Epson
+  Calculate_if Epson.Занятость_станка <> идет_печать and
+					Kyocera.Занятость_станка <> не_идет_печать Выбор_станка = Kyocera
+  Calculate_if Epson.Занятость_станка <> не_идет_печать and
+					Kyocera.Занятость_станка <> не_идет_печать Выбор_станка = Epson
+  Calculate_if Epson.Занятость_станка <> идет_печать and
+					Kyocera.Занятость_станка <> идет_печать Выбор_станка = не_определен
+  $End
+  
+$Function  Запуск_станка : such_as Станки.Занятость_станка
+$Type = algorithmic
+$Parameters
+  Пусто  : such_as Заказы.Имя_станка
+$Body
+  Calculate_if Заказ_1.Имя_станка = Epson or 
+	Заказ_2.Имя_станка = Epson or
+	Заказ_3.Имя_станка = Epson or
+	Заказ_4.Имя_станка = Epson Запуск_станка = идет_печать
+  Calculate_if Заказ_1.Имя_станка = Kyocera or 
+	Заказ_2.Имя_станка = Kyocera or
+	Заказ_3.Имя_станка = Kyocera or
+	Заказ_4.Имя_станка = Kyocera Запуск_станка = идет_печать
+$End
+  
+  
+
